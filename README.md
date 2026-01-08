@@ -73,9 +73,9 @@ npm run tauri build
 
 | Platform | Download |
 |----------|----------|
-| 🪟 **Windows** | [x-pass_0.1.0_x64.msi](https://github.com/ar3love/x-pass/releases) |
-| 🍎 **macOS** | [x-pass_0.1.0_aarch64.dmg](https://github.com/ar3love/x-pass/releases) |
-| 🐧 **Linux** | [x-pass_0.1.0_amd64.deb](https://github.com/ar3love/x-pass/releases) |
+| 🪟 **Windows** | [x-pass_0.1.0_x64.msi](https://github.com/arelove/x-pass/releases) |
+| 🍎 **macOS** | [x-pass_0.1.0_aarch64.dmg](https://github.com/arelove/x-pass/releases) |
+| 🐧 **Linux** | [x-pass_0.1.0_amd64.deb](https://github.com/arelove/x-pass/releases) |
 
 ---
 
@@ -239,7 +239,7 @@ RUST_LOG=debug npm run tauri dev
 We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ### Ways to Contribute
-- 🐛 **Report bugs** — [Open an issue](https://github.com/ar3love/x-pass/issues)
+- 🐛 **Report bugs** — [Open an issue](https://github.com/arelove/x-pass/issues)
 - 🌍 **Translate** — Add new language files
 - 🎨 **Design** — Create new themes
 - 💻 **Code** — Fix bugs or add features
@@ -253,7 +253,7 @@ This project is licensed under **GPL-3.0** with additional commercial restrictio
 
 - ✅ **Free for personal use, education, and open-source projects**
 - ❌ **Commercial entities (revenue > $1M/year) require a separate license**
-- 📧 **Contact:** [your-email@example.com] for commercial licensing
+- 📧 **Contact:** [ar3love@outlook.com] for commercial licensing
 
 See [LICENSE](LICENSE) for full terms.
 
