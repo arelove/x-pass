@@ -1,11 +1,11 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "tauri-template",
+  "productName": "X-PASS",
   "version": "0.1.0",
   "identifier": "com.tauri-app.tauri-template",
   "build": {
     "beforeDevCommand": "npm run dev",
-    "devUrl": "http://localhost:1420",
+    "devUrl": "http://localhost:1430",
     "beforeBuildCommand": "npm run build",
     "frontendDist": "../dist",
     "removeUnusedCommands": true
@@ -14,20 +14,17 @@
     "windows": [
       {
         "label": "main",
-        "title": "Tauri Template",
+        "title": "Password Manager",
         "width": 800,
         "height": 600,
         "decorations": false,
         "transparent": true,
-        "shadow": true,
+        "shadow": false,
         "resizable": true,
-        "minWidth": 593,
-        "minHeight": 370,
+        "minWidth": 600,
+        "minHeight": 670,
         "skipTaskbar": false,
-        "windowEffects": {
-          "effects": ["mica"],
-          "state": "followsWindowActiveState"
-        },
+        
         "center": true,
         "maxWidth": null,
         "maxHeight": null,
@@ -41,8 +38,8 @@
         "userAgent": null,
         "additionalBrowserArgs": null,
         "visibleOnAllWorkspaces": false,
-        "zoomHotkeysEnabled": false,
-        "backgroundColor": "#1a0033"
+        "zoomHotkeysEnabled": false
+        
       }
     ],
     "security": {

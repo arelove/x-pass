@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+﻿import React, { useEffect, useRef } from 'react';
 import Scrollbar from 'smooth-scrollbar';
 
 interface SmoothScrollContainerProps {
@@ -6,15 +6,15 @@ interface SmoothScrollContainerProps {
   damping?: number;
   thumbMinSize?: number;
   renderByPixels?: boolean;
-  height?: string; // высота контейнера, если нужно
+  height?: string;
 }
 
 const SmoothScrollContainer: React.FC<SmoothScrollContainerProps> = ({
   children,
-  damping = 0.05,
+  damping = 0.15,
   thumbMinSize = 20,
   renderByPixels = true,
-  height = '90vh', // значение по умолчанию
+  height = '90vh',
 }) => {
   const scrollbarRef = useRef<HTMLDivElement>(null);
 

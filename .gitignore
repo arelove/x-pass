@@ -1,5 +1,111 @@
+# ============================================================================
+# X-PASS Password Manager - Git Ignore Configuration
+# ============================================================================
+
+# ============================================================================
+# Databases & User Data (CRITICAL - Never commit!)
+# ============================================================================
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+passwords.db
+src-tauri/passwords.db
+
+# Backups & Exports
+*.backup
+*.vault
+*.enc
+
+# ============================================================================
+# Build Artifacts & Dependencies
+# ============================================================================
+
+# Rust/Tauri
+/target/
+/src-tauri/target/
+**/*.rs.bk
+Cargo.lock
+*.pdb
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Build outputs
+dist/
+dist-ssr/
+*.local
+
+# ============================================================================
+# IDE & Editor Files
+# ============================================================================
+
+# VSCode
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+
+# JetBrains IDEs (IntelliJ, WebStorm, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ============================================================================
+# Operating System Files
+# ============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+.directory
+.Trash-*
+
+# ============================================================================
+# Development & Testing
+# ============================================================================
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Test coverage
+coverage/
+*.lcov
+.nyc_output/
+
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,18 +113,44 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# ============================================================================
+# Tauri-Specific
+# ============================================================================
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Generated icons
+src-tauri/icons/*.ico
+src-tauri/icons/*.icns
+# Keep template icons
+!src-tauri/icons/icon.png
+
+# WiX installer artifacts
+*.wixobj
+*.wixpdb
+
+# ============================================================================
+# Temporary & Cache Files
+# ============================================================================
+*.tmp
+*.temp
+.cache/
+.parcel-cache/
+.vite/
+
+# ============================================================================
+# Security & Sensitive Data
+# ============================================================================
+
+# Private keys & certificates
+*.key
+*.pem
+*.p12
+*.pfx
+*.cer
+*.crt
+
+# Activity logs with photos
+activity_logs/
+failed_login_photos/
+
+# OTP secrets (if stored separately)
+otp_secrets/

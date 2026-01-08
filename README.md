@@ -1,96 +1,292 @@
-# Tauri Template
+# 🔐 X-PASS — Secure Password Manager
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/arelove/Tauri-v2-Template)
-![GitHub license](https://img.shields.io/github/license/arelove/Tauri-v2-Template)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
+[![Tauri](https://img.shields.io/badge/Tauri-2.0-24C8DB?logo=tauri)](https://tauri.app)
+[![Rust](https://img.shields.io/badge/Rust-1.70+-orange?logo=rust)](https://www.rust-lang.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://reactjs.org)
 
-A cross-platform desktop application template built with Tauri, React, TypeScript, and Material-UI. This template provides a modern UI with internationalization, theme switching, and system tray integration.
+> **Enterprise-grade password manager with military-level security, offline-first architecture, and duress mode protection.**
+
+<!-- 📸 INSERT SCREENSHOT HERE -->
+![X-PASS Interface](docs/images/hero-screenshot.png)
+
+---
 
 ## ✨ Features
 
-- **Custom Titlebar**: Includes minimize, maximize, and theme toggle buttons.
-- **Network Status Dialog**: Displays SSID and signal strength.
-- **Internationalization**: Supports English and Russian languages.
-- **Theme Switching**: Light, Dark, and Custom themes.
-- **Smooth Scrolling**: Powered by `smooth-scrollbar`.
-- **System Tray**: Seamless integration for quick access.
+### 🔒 **Military-Grade Security**
+- **AES-256-GCM Encryption** — Bank-level encryption for all stored data
+- **Argon2id Password Hashing** — Quantum-resistant key derivation
+- **Zero-Knowledge Architecture** — Your master password never leaves your device
+- **Offline-First Design** — No cloud, no tracking, no data leaks
 
-## 📸 Assets
+### 🚨 **Advanced Security Features**
+- **🔑 Two-Factor Authentication (TOTP)** — Compatible with Google Authenticator, Authy
+- **📸 Failed Login Photo Capture** — Captures photos of unauthorized access attempts
+- **🥷 Duress/Pseudo Mode** — Show fake vault under coercion (configurable panic password)
+- **📊 Activity Logging** — Track all vault access with detailed analytics
+- **🔄 Encrypted Backups** — Export/import with password-protected encryption
 
-![Main Window](pictures/Main.png)
+### 🎨 **User Experience**
+- **10 Premium Themes** — Dark, Light, Cyberpunk, Dracula, Ocean, and more
+- **13 Languages** — English, Russian, Spanish, German, French, Arabic, Hindi, etc.
+- **Custom Window Controls** — Frameless design with smooth animations
+- **Smooth Scrolling** — Polished UI with Framer Motion animations
 
-https://github.com/user-attachments/assets/6484725e-61c2-4830-9500-3ddb1a924f1b
+<!-- 🎥 INSERT DEMO GIF HERE -->
+![Demo GIF](docs/images/demo.gif)
 
-## 🚀 Getting Started
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
-
-- Node.js (v16 or higher)
-- Rust (v1.59 or higher)
-- Tauri CLI
+- **Node.js** 18+ ([Download](https://nodejs.org))
+- **Rust** 1.70+ ([Install](https://rustup.rs))
+- **Tauri CLI** ([Setup Guide](https://tauri.app/start/prerequisites))
 
 ### Installation
 
-1. Clone the repository:
+```bash
+# Clone the repository
+git clone https://github.com/ar3love/x-pass.git
+cd x-pass
 
-   ```bash
-   git clone https://github.com/your-username/tauri-template.git
-   cd Tauri-v2-Template
-   ```
+# Install dependencies
+npm install
 
-2. Install dependencies:
+# Run in development mode
+npm run tauri dev
 
-   ```bash
-   npm install
-   ```
+# Build for production
+npm run tauri build
+```
 
-3. Run the application in development mode:
+### First Launch
+1. Create your **master password** (min. 8 characters)
+2. Enable **2FA** (recommended) — Scan QR code with authenticator app
+3. Start adding passwords to your vault!
 
-   ```bash
-   npm run tauri dev
-   ```
+---
 
-4. Build the application for production:
+## 📦 Download Pre-Built Binaries
 
-   ```bash
-   npm run tauri build
-   ```
+| Platform | Download |
+|----------|----------|
+| 🪟 **Windows** | [x-pass_0.1.0_x64.msi](https://github.com/ar3love/x-pass/releases) |
+| 🍎 **macOS** | [x-pass_0.1.0_aarch64.dmg](https://github.com/ar3love/x-pass/releases) |
+| 🐧 **Linux** | [x-pass_0.1.0_amd64.deb](https://github.com/ar3love/x-pass/releases) |
 
-🛠️ Usage
+---
 
-- Launch the app to explore the custom titlebar, theme switching, and network status dialog.
-- Use the system tray to access quick actions.
-- Switch languages via the settings menu (English/Russian).
-
-## 📂 Project Structure
+## 🔐 Security Architecture
 
 ```
-tauri-template/
-├── src/                # React frontend code
-├── src-tauri/          # Tauri backend (Rust)
-├── public/             # Static assets
-├── pictures/           # Pictures for README
-└── README.md
+┌─────────────────────────────────────────────────┐
+│          Your Master Password (Argon2id)        │
+└─────────────────┬───────────────────────────────┘
+                  │ Derives 256-bit key
+                  ▼
+┌─────────────────────────────────────────────────┐
+│       AES-256-GCM Encrypted SQLite Database     │
+│  ┌──────────────────────────────────────────┐   │
+│  │  Encrypted Entry 1: {site, user, pass}   │   │
+│  │  Encrypted Entry 2: {site, user, pass}   │   │
+│  │  Encrypted Entry N: {site, user, pass}   │   │
+│  └──────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────┘
+         │                              │
+         │ Pseudo Mode                  │ Real Vault
+         ▼                              ▼
+    Fake Vault (Duress)          Real Passwords
 ```
+
+### Key Security Features
+- **No Master Password Storage** — Only a hash is stored (Argon2id with salt)
+- **Per-Entry Encryption** — Each password is individually encrypted
+- **Memory Wiping** — Sensitive data cleared from RAM after use
+- **No Network Calls** — All operations happen locally (optional offline mode)
+
+<!-- 📸 INSERT SECURITY DIAGRAM HERE -->
+![Security Flow](docs/images/security-diagram.png)
+
+---
+
+## 🛡️ Duress/Pseudo Mode
+
+**Scenario:** Someone forces you to unlock your vault under threat.
+
+**Solution:** Set up a **panic password** that shows a fake vault with decoy data.
+
+### How It Works
+1. Go to **Settings → Security → Pseudo Mode**
+2. Create a secondary password
+3. Choose action: **Show Fake Vault** or **Wipe Real Data**
+4. Generate fake entries automatically
+
+```typescript
+// Real password → Real vault
+login("my-real-password") // ✅ Accesses actual passwords
+
+// Panic password → Decoy vault
+login("panic-123") // ⚠️ Shows fake LinkedIn/Gmail entries
+```
+
+<!-- 🎥 INSERT PSEUDO MODE DEMO HERE -->
+![Pseudo Mode Demo](docs/images/pseudo-mode-demo.gif)
+
+---
+
+## 🌍 Supported Languages
+
+| Language | Code | Status |
+|----------|------|--------|
+| 🇬🇧 English | `en` | ✅ Complete |
+| 🇷🇺 Russian | `ru` | ✅ Complete |
+| 🇪🇸 Spanish | `es` | ✅ Complete |
+| 🇩🇪 German | `de` | ✅ Complete |
+| 🇫🇷 French | `fr` | ✅ Complete |
+| 🇸🇦 Arabic | `ar` | ✅ Complete |
+| 🇮🇳 Hindi | `hi` | ✅ Complete |
+| 🇮🇩 Indonesian | `id` | ✅ Complete |
+| 🇮🇹 Italian | `it` | ✅ Complete |
+| 🇯🇵 Japanese | `ja` | ✅ Complete |
+| 🇰🇷 Korean | `ko` | ✅ Complete |
+| 🇧🇷 Portuguese | `pt` | ✅ Complete |
+| 🇨🇳 Chinese | `zh` | ✅ Complete |
+
+Want to add your language? [Contribute here!](CONTRIBUTING.md)
+
+---
+
+## 🎨 Themes
+
+| Theme | Preview |
+|-------|---------|
+| 🌙 **Dark** | Default dark mode with blue accents |
+| ☀️ **Light** | Clean minimalist light theme |
+| 💜 **Cyberpunk** | Neon purple with glitch effects |
+| 🧛 **Dracula** | Popular purple/pink dark theme |
+| 🌊 **Ocean** | Calming blue gradient |
+| 🏜️ **Sand** | Warm beige desert theme |
+| 🌅 **Sunset** | Orange/purple gradient |
+| ☢️ **Toxic** | Radioactive green |
+| 🎆 **Neon** | Bright cyan/magenta |
+| 🌈 **Fallout** | Post-apocalyptic amber |
+
+<!-- 📸 INSERT THEME SHOWCASE HERE -->
+![Theme Showcase](docs/images/themes-showcase.png)
+
+---
+
+## 📊 Project Structure
+
+```
+x-pass/
+├── src/                    # React frontend
+│   ├── components/         # UI components
+│   ├── context/           # React contexts (Auth, Theme, Pseudo)
+│   ├── pages/             # Main pages (Login, Vault, Settings)
+│   └── assets/            # Translations, images
+│
+├── src-tauri/             # Rust backend
+│   ├── src/
+│   │   ├── password_manager.rs   # Core vault logic
+│   │   ├── otp.rs                # TOTP 2FA
+│   │   ├── pseudo_mode.rs        # Duress mode
+│   │   ├── activity_logger.rs    # Security logging
+│   │   ├── backup.rs             # Encrypted export/import
+│   │   └── lib.rs                # Main entry point
+│   └── Cargo.toml         # Rust dependencies
+│
+├── docs/                  # Documentation
+│   ├── images/           # Screenshots & diagrams
+│   └── architecture.md   # Technical deep dive
+│
+└── README.md             # You are here!
+```
+
+---
+
+## 🧪 Development
+
+### Run Tests
+```bash
+npm run test
+```
+
+### Build for Specific Platform
+```bash
+# Windows
+npm run tauri build -- --target x86_64-pc-windows-msvc
+
+# macOS (Intel)
+npm run tauri build -- --target x86_64-apple-darwin
+
+# macOS (Apple Silicon)
+npm run tauri build -- --target aarch64-apple-darwin
+
+# Linux
+npm run tauri build -- --target x86_64-unknown-linux-gnu
+```
+
+### Debug Mode
+```bash
+# Enable verbose logging
+RUST_LOG=debug npm run tauri dev
+```
+
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -m 'Add your feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a Pull Request.
+### Ways to Contribute
+- 🐛 **Report bugs** — [Open an issue](https://github.com/ar3love/x-pass/issues)
+- 🌍 **Translate** — Add new language files
+- 🎨 **Design** — Create new themes
+- 💻 **Code** — Fix bugs or add features
+- 📝 **Documentation** — Improve guides
+
+---
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under **GPL-3.0** with additional commercial restrictions.
 
-## 📞 Contact
+- ✅ **Free for personal use, education, and open-source projects**
+- ❌ **Commercial entities (revenue > $1M/year) require a separate license**
+- 📧 **Contact:** [your-email@example.com] for commercial licensing
 
-- Open an issue on GitHub.
+See [LICENSE](LICENSE) for full terms.
 
-## 🛠️ Troubleshooting
+---
 
-- **Error: Rust not found**: Ensure Rust is installed (`rustc --version`).
-- **Tauri CLI fails**: Run `cargo install tauri-cli` to install the CLI.
+## 🙏 Acknowledgments
+
+Built with these amazing technologies:
+- [Tauri](https://tauri.app) — Rust-powered desktop framework
+- [React](https://reactjs.org) — UI library
+- [Material-UI](https://mui.com) — Component library
+- [Argon2](https://github.com/P-H-C/phc-winner-argon2) — Password hashing
+- [AES-GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode) — Encryption standard
+
+---
+
+## 📞 Support
+
+- 🐛 **Bug Reports:** [GitHub Issues](https://github.com/ar3love/x-pass/issues)
+- 💬 **Discussions:** [GitHub Discussions](https://github.com/ar3love/x-pass/discussions)
+- 📧 **Email:** [your-email@example.com]
+- 🌐 **Website:** [Coming Soon]
+
+---
+
+<p align="center">
+  <strong>Made with ❤️ by <a href="https://github.com/ar3love">ar3love</a></strong>
+</p>
+
+<p align="center">
+  ⭐ <strong>Star this repo if you find it useful!</strong> ⭐
+</p>

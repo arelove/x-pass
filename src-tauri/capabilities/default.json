@@ -15,7 +15,12 @@
     "core:window:allow-close",
     "core:window:allow-show",
     "core:window:allow-hide",
-    "core:window:allow-set-focus"
-    
+    "core:window:allow-set-focus",
+    "clipboard-manager:allow-write-text",
+    "dialog:allow-save", 
+    "dialog:default",
+    "fs:allow-app-write",
+    "shell:allow-open",
+    "shell:default"
   ]
 }

@@ -1,21 +1,25 @@
+﻿/**
+ * ============================================================================
+ * X-PASS Password Manager
+ * Copyright (C) 2026 ar3love
+ * 
+ * Licensed under GPL-3.0. See LICENSE file for details.
+ * ============================================================================
+ */
 import React, { useState } from 'react';
 import { Box, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import HomeIcon from '@mui/icons-material/Home';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import TauriIcon from '../assets/icons/tauri.svg';
-import ReactIcon from '../assets/icons/react.svg';
-import RustIcon from '../assets/icons/rust.svg';
-import MuiIcon from '../assets/icons/mui.svg';
-import ViteIcon from '../assets/icons/vite.svg';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar: React.FC = () => {
   const [mode, setMode] = useState<'closed' | 'icons' | 'full'>('closed');
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const toggleSidebar = () => {
     setMode((prev) => {
@@ -26,22 +30,9 @@ const Sidebar: React.FC = () => {
   };
 
   const menuItems = [
-    { text: 'Home', icon: <HomeIcon />, path: '/' },
-    { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
-    { text: 'Help', icon: <HelpOutlineIcon />, path: '/help' },
+    { text: t('vault.title'), icon: <HomeIcon />, path: '/' },
+    { text: t('settings'), icon: <SettingsIcon />, path: '/settings' },
   ];
-
-  const techStack = [
-    { name: 'Tauri', icon: <img src={TauriIcon} alt="Tauri" width={20} height={20} />, tooltip: 'Built with Tauri', url: 'https://tauri.app/' },
-    { name: 'React', icon: <img src={ReactIcon} alt="React" width={20} height={20} />, tooltip: 'Built with React', url: 'https://react.dev/' },
-    { name: 'MUI', icon: <img src={MuiIcon} alt="MUI" width={20} height={20} />, tooltip: 'Built with Material-UI', url: 'https://mui.com/' },
-    { name: 'Rust', icon: <img src={RustIcon} alt="Rust" width={20} height={20} />, tooltip: 'Built with Rust', url: 'https://www.rust-lang.org/' },
-    { name: 'Vite', icon: <img src={ViteIcon} alt="Vite" width={20} height={20} />, tooltip: 'Built with Vite', url: 'https://vitejs.dev/' },
-  ];
-
-  const handleTechClick = (url: string) => {
-    window.open(url, '_blank');
-  };
 
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
@@ -53,6 +44,7 @@ const Sidebar: React.FC = () => {
           transform: 'translateY(-50%)',
           ml: mode === 'closed' ? '1px' : mode === 'icons' ? '56px' : '201px',
           zIndex: 1200,
+          
         }}
       >
         <IconButton onClick={toggleSidebar}>
@@ -72,6 +64,7 @@ const Sidebar: React.FC = () => {
           overflow: 'hidden',
           borderRight: mode === 'closed' ? 'none' : '1px solid',
           borderColor: 'divider',
+          
         }}
       >
         {mode !== 'closed' && (
@@ -95,6 +88,7 @@ const Sidebar: React.FC = () => {
                             height: '100%',
                             backgroundColor: 'primary.main',
                             transition: 'background-color 0.2s ease',
+                            
                           },
                         }),
                       }}
@@ -102,25 +96,20 @@ const Sidebar: React.FC = () => {
                       <ListItemIcon sx={{ minWidth: mode === 'full' ? 40 : 40, color: 'text.primary' }}>
                         {item.icon}
                       </ListItemIcon>
-                      {mode === 'full' && <ListItemText primary={item.text} />}
+                      {mode === 'full' && (
+                        <ListItemText 
+                          primary={item.text} 
+                          primaryTypographyProps={{
+                            fontWeight: location.pathname === item.path ? 700 : 500,
+                          }}
+                        />
+                      )}
                     </ListItemButton>
                   </Tooltip>
                 </ListItem>
               ))}
             </List>
-            {mode === 'full' && (
-              <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'flex-end', pb: 2 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, width: '100%' }}>
-                  {techStack.map((tech) => (
-                    <Tooltip key={tech.name} title={tech.tooltip} placement="top">
-                      <IconButton size="small" sx={{ color: 'text.primary' }} onClick={() => handleTechClick(tech.url)}>
-                        {tech.icon}
-                      </IconButton>
-                    </Tooltip>
-                  ))}
-                </Box>
-              </Box>
-            )}
+            
           </>
         )}
       </Box>

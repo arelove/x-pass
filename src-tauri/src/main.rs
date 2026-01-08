@@ -2,5 +2,6 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    tauri_template_lib::run()
+    // Call the library's run function
+    x_pass_lib::run()
 }

@@ -1,38 +1,99 @@
 [package]
-name = "tauri-template"
-version = "0.1.0"
-description = "A Tauri App"
+name = "x-pass"
+version = "0.3.1"
+description = "What about save ur f*cking passwords?"
 authors = ["ar3love"]
 edition = "2021"
 
-
+# ============================================================================
+# Library Configuration
+# ============================================================================
 [lib]
-name = "tauri_template_lib"
+name = "x_pass_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
+# ============================================================================
+# Build Dependencies
+# ============================================================================
 [build-dependencies]
 tauri-build = { version = "2", features = ["config-json5"] }
 
+# ============================================================================
+# Runtime Dependencies
+# ============================================================================
 [dependencies]
-tauri = { version = "2.0.0", features = [ "macos-private-api", "tray-icon", "image-png", "config-json5"] }
+# --- Tauri Core & Plugins ---
+tauri = { version = "2.0.0", features = [
+    "macos-private-api",
+    "tray-icon",
+    "image-png",
+    "config-json5"
+] }
 tauri-plugin-opener = "2"
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2.4.4"
+tauri-plugin-shell = "2"
+tauri-plugin-clipboard-manager = "2"
+
 tauri-plugin-devtools = "2.0.1"
 
-network-interface = "2.0.3"
+# --- Serialization ---
+serde = { version = "1", features = ["derive"], default-features = false }
+serde_json = { version = "1", default-features = false }
+
+# --- Cryptography & Security ---
+rusqlite = { version = "0.31.0", features = ["bundled"] }
+argon2 = "0.5.3"          # Password hashing
+aes-gcm = "0.10.3"        # AES-256-GCM encryption
+sha2 = "0.10.9"           # SHA-256 for TOTP
+totp-rs = "5.0.1"         # Two-Factor Authentication
+base64 = "0.22.1"         # Base64 encoding
+base32 = "0.4.0"          # Base32 for TOTP secrets
+rand = "0.8.5"            # Cryptographically secure RNG
+
+# --- Networking ---
 reqwest = { version = "0.12.22", features = ["json"] }
+network-interface = "2.0.3"
 
+# --- Utilities ---
+lazy_static = "1.4.0"     # Static initialization
+chrono = { version = "0.4", features = ["serde"] }  # Date/time handling
+log = "0.4.17"            # Logging facade
+env_logger = { version = "0.9.0", default-features = false }  # Logger implementation
+
+# ============================================================================
+# Platform-Specific Dependencies
+# ============================================================================
 [target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
-# tauri-plugin-updater = "2"
-tauri-plugin-window-state = "2"
+tauri-plugin-window-state = "2"  # Save/restore window state
+# tauri-plugin-updater = "2"     # Auto-update (commented out)
 
-
+# ============================================================================
+# Release Profile - Optimized for Size & Performance
+# ============================================================================
 [profile.release]
-panic = "abort"  # Оптимизация: abort вместо unwind
-codegen-units = 1  # Меньше размер, но дольше билд
-lto = true  # Link-time optimization
-opt-level = "s"  # Оптимизация на размер
-strip = true  # Убрать debug symbols
+panic = "abort"           # ✅ Smaller binary size
+codegen-units = 1         # ✅ Better optimization
+lto = "fat"               # ✅ Full LTO (Link-Time Optimization)
+opt-level = "z"           # ✅ Optimize for size (use "s" if "z" causes issues)
+strip = true              # ✅ Remove debug symbols
+incremental = false       # ✅ Disable incremental compilation
 
+# ============================================================================
+# Dev Profile - Fast Compilation
+# ============================================================================
+[profile.dev]
+opt-level = 0          # No optimization for faster builds
+debug = true           # Include debug info
+strip = false          # Keep debug symbols
 
+# ============================================================================
+# Distribution Profile (optional) - Maximum Optimization
+# ============================================================================
+[profile.dist]
+inherits = "release"
+opt-level = "z"        # Aggressive size optimization
+lto = "fat"            # Full LTO across all crates
+codegen-units = 1
+panic = "abort"
+strip = true
