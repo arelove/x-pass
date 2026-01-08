@@ -145,7 +145,7 @@ export const PseudoModeDialog: React.FC<PseudoModeDialogProps> = ({
         </Box>
       </DialogTitle>
       <SmoothScrollContainer
-                      height="calc(100vh)" // Ð²Ñ‹Ñ‡Ð¸Ñ‚Ð°ÐµÐ¼ Ð²Ñ‹ÑÐ¾Ñ‚Ñƒ TitleBar
+                      height="calc(100vh)"
                     >
       <DialogContent sx={{ p: 3 }}>
         
@@ -240,8 +240,8 @@ export const PseudoModeDialog: React.FC<PseudoModeDialogProps> = ({
                           <ListItemText
                             primary={
                               <Box display="flex" alignItems="center" gap={1}>
-                                <Typography variant="body2">
-                                  {pwd.password ? 'â€¢'.repeat(pwd.password.length) : 'â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢'}
+                                <Typography variant="body2" component="span">
+                                  {'•'.repeat(pwd.password?.length || 8)}
                                 </Typography>
                                 <Chip 
                                   label={pwd.password 

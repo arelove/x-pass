@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "X-PASS",
-  "version": "0.1.0",
+  "version": "0.3.1",
   "identifier": "com.tauri-app.tauri-template",
   "build": {
     "beforeDevCommand": "npm run dev",
