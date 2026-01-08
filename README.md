@@ -272,15 +272,15 @@ Built with these amazing technologies:
 
 ## 📞 Support
 
-- 🐛 **Bug Reports:** [GitHub Issues](https://github.com/ar3love/x-pass/issues)
-- 💬 **Discussions:** [GitHub Discussions](https://github.com/ar3love/x-pass/discussions)
-- 📧 **Email:** [your-email@example.com]
+- 🐛 **Bug Reports:** [GitHub Issues](https://github.com/arelove/x-pass/issues)
+- 💬 **Discussions:** [GitHub Discussions](https://github.com/arelove/x-pass/discussions)
+- 📧 **Email:** [ar3love@outlook.com]
 - 🌐 **Website:** [Coming Soon]
 
 ---
 
 <p align="center">
-  <strong>Made with ❤️ by <a href="https://github.com/ar3love">ar3love</a></strong>
+  <strong>Made with ❤️ by <a href="https://github.com/arelove">arelove</a></strong>
 </p>
 
 <p align="center">
