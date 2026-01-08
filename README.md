@@ -210,10 +210,6 @@ x-pass/
 
 ## 🧪 Development
 
-### Run Tests
-```bash
-npm run test
-```
 
 ### Build for Specific Platform
 ```bash
