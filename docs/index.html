@@ -445,6 +445,102 @@
             color: var(--text-secondary);
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            animation: zoomIn 0.3s;
+            border-radius: 10px;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            color: #fff;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10000;
+        }
+
+        .modal-close:hover,
+        .modal-close:focus {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        .modal-caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        /* Обновляем стиль gallery-item для указателя курсора */
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer; /* Уже было, но убедимся */
+            transition: transform 0.3s ease;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        /* Добавляем hover эффект */
+        .gallery-item:hover::before {
+            content: '🔍 Click to enlarge';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(102, 126, 234, 0.95);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            z-index: 10;
+            opacity: 0;
+            animation: fadeInHover 0.3s forwards;
+        }
+
+        @keyframes fadeInHover {
+            to { opacity: 1; }
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -585,9 +681,9 @@
             <h2 class="section-title">📸 Screenshots Gallery</h2>
             <div class="gallery-grid">
                 <!-- Login Screen -->
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="openModal('images/login.png', 'Login Screen with 2FA')">
                     <img 
-                        src="images/login.png" 
+                        src="images/login-otp.png" 
                         alt="Login Screen with 2FA" 
                         style="width: 100%; height: 100%; object-fit: cover;"
                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
@@ -600,7 +696,7 @@
                 </div>
                 
                 <!-- Main Vault Interface -->
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="openModal('images/hero-screenshot.png', 'Main Vault Interface')">
                     <img 
                         src="images/hero-screenshot.png" 
                         alt="Main Vault Interface" 
@@ -615,7 +711,7 @@
                 </div>
                 
                 <!-- Settings Panel -->
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="openModal('images/settings.png', 'Settings & Security')">
                     <img 
                         src="images/settings.png" 
                         alt="Settings & Security" 
@@ -630,7 +726,7 @@
                 </div>
                 
                 <!-- Activity Dashboard -->
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="openModal('images/activity-logs.png', 'Activity Dashboard')">
                     <img 
                         src="images/activity-logs.png" 
                         alt="Activity Dashboard" 
@@ -645,7 +741,7 @@
                 </div>
                 
                 <!-- Theme Customization -->
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="openModal('images/themes-showcase.png', 'Theme Customization')">
                     <img 
                         src="images/themes-showcase.png" 
                         alt="Theme Customization" 
@@ -660,7 +756,7 @@
                 </div>
                 
                 <!-- Duress Mode -->
-                <div class="gallery-item">
+                <div class="gallery-item" onclick="openModal('images/duress-mode.png', 'Pseudo/Duress Mode')">
                     <img 
                         src="images/duress-mode.png" 
                         alt="Pseudo/Duress Mode" 
@@ -790,5 +886,36 @@
             </div>
         </div>
     </footer>
+    <script>
+    // Открыть модальное окно
+    function openModal(imageSrc, caption) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        
+        modal.style.display = 'block';
+        modalImg.src = imageSrc;
+        modalCaption.textContent = caption;
+        
+        // Блокируем скролл страницы
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Закрыть модальное окно
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = 'none';
+        
+        // Возвращаем скролл
+        document.body.style.overflow = 'auto';
+    }
+
+    // Закрытие по клавише Escape
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
+</script>
 </body>
 </html>
