@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-PASS - Military-Grade Password Manager</title>
+    <meta name="description" content="Enterprise-grade password manager with AES-256 encryption, offline-first architecture, and duress mode protection.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5568d3;
+            --secondary: #764ba2;
+            --bg-dark: #0f0f23;
+            --bg-card: #1a1a2e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0aec0;
+            --accent: #48bb78;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 20px 100px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: white;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1em;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 20px;
+            background: var(--bg-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-card) 100%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 15px;
+            font-size: 3em;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 30px 20px 20px;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            padding: 100px 20px;
+            background: var(--bg-dark);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .tech-item {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .tech-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .tech-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .tech-desc {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        /* Download Section */
+        .download {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            text-align: center;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .download-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .download-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .download-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .download-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .download-card .btn {
+            margin-top: 20px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-card);
+            padding: 60px 20px 30px;
+            border-top: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(102, 126, 234, 0.1);
+            color: var(--text-secondary);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2em;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo-nav">🔐 X-PASS</a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#tech">Technology</a></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="https://github.com/arelove/x-pass">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">
+                <span>🛡️</span>
+                <span>Military-Grade Security • GPL-3.0 License</span>
+            </div>
+            <h1>X-PASS</h1>
+            <p class="hero-subtitle">
+                Enterprise-grade password manager with AES-256 encryption,<br>
+                offline-first architecture, and duress mode protection
+            </p>
+            <div class="cta-buttons">
+                <a href="https://github.com/arelove/x-pass/releases" class="btn btn-primary">
+                    <span>⬇️</span> Download Now
+                </a>
+                <a href="https://github.com/arelove/x-pass" class="btn btn-secondary">
+                    <span>📦</span> View on GitHub
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">AES-256</div>
+                    <div class="stat-label">Encryption</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Offline</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">13</div>
+                    <div class="stat-label">Languages</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Themes</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">🚀 Advanced Security Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>AES-256-GCM Encryption</h3>
+                    <p>Bank-level encryption for all stored data. Your passwords are protected with military-grade cryptography that's virtually unbreakable.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔑</div>
+                    <h3>Two-Factor Authentication</h3>
+                    <p>Built-in TOTP support compatible with Google Authenticator and Authy. Add an extra layer of security to your vault.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3>Failed Login Photo Capture</h3>
+                    <p>Automatically captures photos of unauthorized access attempts. Know exactly who tried to break into your vault.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥷</div>
+                    <h3>Duress/Pseudo Mode</h3>
+                    <p>Show a fake vault under coercion. Configure panic passwords that display decoy data to protect your real passwords.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Activity Logging</h3>
+                    <p>Track all vault access with detailed analytics. Monitor login attempts, password changes, and security events.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Encrypted Backups</h3>
+                    <p>Export and import your vault with password-protected encryption. Your data stays secure even in backups.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Offline-First Design</h3>
+                    <p>Zero network calls. All operations happen locally on your device. No cloud, no tracking, no data leaks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>10 Premium Themes</h3>
+                    <p>Dark, Light, Cyberpunk, Dracula, Ocean, and more. Customize your experience with beautiful color schemes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>13 Languages</h3>
+                    <p>Full internationalization support including English, Russian, Spanish, German, French, Arabic, Hindi, and more.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">📸 Screenshots Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>🔐</span>
+                        <small style="font-size: 0.4em; color: rgba(255,255,255,0.5);">Login Screen</small>
+                    </div>
+                    <div class="gallery-caption">Login Screen with 2FA</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>💼</span>
+                        <small style="font-size: 0.4em; color: rgba(255,255,255,0.5);">Vault Interface</small>
+                    </div>
+                    <div class="gallery-caption">Main Vault Interface</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>⚙️</span>
+                        <small style="font-size: 0.4em; color: rgba(255,255,255,0.5);">Settings Panel</small>
+                    </div>
+                    <div class="gallery-caption">Settings & Security</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>📊</span>
+                        <small style="font-size: 0.4em; color: rgba(255,255,255,0.5);">Analytics Dashboard</small>
+                    </div>
+                    <div class="gallery-caption">Activity Dashboard</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>🎨</span>
+                        <small style="font-size: 0.4em; color: rgba(255,255,255,0.5);">Theme Selector</small>
+                    </div>
+                    <div class="gallery-caption">Theme Customization</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <span>🥷</span>
+                        <small style="font-size: 0.4em; color: rgba(255,255,255,0.5);">Duress Mode</small>
+                    </div>
+                    <div class="gallery-caption">Pseudo/Duress Mode</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <h2 class="section-title">🛠️ Built With Modern Technology</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">🦀</div>
+                    <div class="tech-name">Rust</div>
+                    <div class="tech-desc">Backend Security</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚛️</div>
+                    <div class="tech-name">React 19</div>
+                    <div class="tech-desc">Modern UI</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🖼️</div>
+                    <div class="tech-name">Tauri 2.0</div>
+                    <div class="tech-desc">Desktop Framework</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔐</div>
+                    <div class="tech-name">Argon2id</div>
+                    <div class="tech-desc">Password Hashing</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🛡️</div>
+                    <div class="tech-name">AES-256-GCM</div>
+                    <div class="tech-desc">Encryption</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📱</div>
+                    <div class="tech-name">Material-UI</div>
+                    <div class="tech-desc">Components</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">📦 Download X-PASS</h2>
+            <p class="hero-subtitle" style="color: rgba(255,255,255,0.9);">
+                Available for Windows, macOS, and Linux
+            </p>
+            <div class="download-grid">
+                <div class="download-card">
+                    <div class="download-icon">🪟</div>
+                    <h3>Windows</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 10px;">x-pass_0.3.1_x64.msi</p>
+                    <a href="https://github.com/arelove/x-pass/releases" class="btn btn-primary">Download</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">🍎</div>
+                    <h3>macOS</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 10px;">x-pass_0.3.1_aarch64.dmg</p>
+                    <button class="btn btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">Coming soon...</button>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">🐧</div>
+                    <h3>Linux</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 10px;">x-pass_0.3.1_amd64.deb</p>
+                    <button class="btn btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">Coming soon...</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🔐 X-PASS</h4>
+                    <p style="color: var(--text-secondary); line-height: 1.7;">
+                        Military-grade password manager built with security, privacy, and user experience in mind.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/arelove/x-pass">GitHub Repository</a></li>
+                        <li><a href="https://github.com/arelove/x-pass/releases">Download Releases</a></li>
+                        <li><a href="https://github.com/arelove/x-pass/blob/main/README.md">Documentation</a></li>
+                        <li><a href="https://github.com/arelove/x-pass/blob/main/CONTRIBUTING.md">Contributing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/arelove/x-pass/issues">Report Issues</a></li>
+                        <li><a href="https://github.com/arelove/x-pass/discussions">Discussions</a></li>
+                        <li><a href="https://github.com/arelove/x-pass/blob/main/LICENSE">License (GPL-3.0)</a></li>
+                        <li><a href="mailto:ar3love@outlook.com">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Security Features</a></li>
+                        <li><a href="#gallery">Screenshots</a></li>
+                        <li><a href="#tech">Technology Stack</a></li>
+                        <li><a href="#download">Downloads</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 X-PASS. Made with ❤️ by <a href="https://github.com/arelove" style="color: var(--primary);">arelove</a></p>
+                <p style="margin-top: 10px; opacity: 0.7;">Licensed under GPL-3.0 • Open Source Password Manager</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
