@@ -71,15 +71,25 @@ npm run tauri build
 
 ---
 
-## 📦 Download Pre-Built Binaries
+## 📦 Downloads
 
-| Platform | Download |
-|----------|----------|
-| 🪟 **Windows** | [x-pass_0.1.0_x64.msi](https://github.com/arelove/x-pass/releases) |
-| 🍎 **macOS** | [x-pass_0.1.0_aarch64.dmg](https://github.com/arelove/x-pass/releases) |
-| 🐧 **Linux** | [x-pass_0.1.0_amd64.deb](https://github.com/arelove/x-pass/releases) |
+Latest version: **v0.3.1** (January 08, 2026)
 
----
+| Platform                  | File                              | Size     | Download Link                                      |
+|---------------------------|-----------------------------------|----------|----------------------------------------------------|
+| 🪟 **Windows (MSI EN)**   | X-PASS_0.3.1_x64_en-US.msi       | ~191 MB  | [Download](https://github.com/arelove/x-pass/releases/latest/download/X-PASS_0.3.1_x64_en-US.msi) |
+| 🪟 **Windows (MSI RU)**   | X-PASS_0.3.1_x64_ru-RU.msi       | ~191 MB  | [Download](https://github.com/arelove/x-pass/releases/latest/download/X-PASS_0.3.1_x64_ru-RU.msi) |
+| 🪟 **Windows (NSIS)**     | X-PASS_0.3.1_x64-setup.exe       | ~191 MB  | [Download](https://github.com/arelove/x-pass/releases/latest/download/X-PASS_0.3.1_x64-setup.exe) |
+| 🍎 **macOS**              | —                                 | —        | **Coming soon** (build from source available)      |
+| 🐧 **Linux**              | —                                 | —        | **Coming soon** (build from source available)      |
+
+**Notes:**
+- All Windows installers are for x64 (Windows 10 1809+ / Windows 11 recommended).
+- After installation, the app size is approximately **7 MB**.
+- macOS and Linux builds will be added in upcoming releases.
+- You can always build from source if needed: [Build Instructions](https://github.com/arelove/x-pass#building-from-source)
+
+For older versions or source code, check the full [Releases page](https://github.com/arelove/x-pass/releases).
 
 ## 🔐 Security Architecture
 
