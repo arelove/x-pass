@@ -197,13 +197,13 @@ export const EnhancedPhotoViewer: React.FC<EnhancedPhotoViewerProps> = ({
           }}
         >
           <Stack spacing={0.5}>
-            <Typography variant="body1" sx={{ color: 'white', fontWeight: 600 }}>
-              ðŸ‘¤ {t('settings.username')}: {currentPhoto.username_attempt}
-            </Typography>
-            <Typography variant="body2" sx={{ color: 'grey.400' }}>
-              ðŸ“… {new Date(currentPhoto.timestamp).toLocaleString()}
-            </Typography>
-          </Stack>
+          <Typography variant="body1" sx={{ color: 'white', fontWeight: 600 }}>
+            👤 {t('settings.username')}: {currentPhoto.username_attempt}
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'grey.400' }}>
+            📅 {new Date(currentPhoto.timestamp).toLocaleString()}
+          </Typography>
+        </Stack>
         </Box>
       )}
     </Dialog>

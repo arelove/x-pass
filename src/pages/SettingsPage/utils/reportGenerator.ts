@@ -649,7 +649,7 @@ export const generateSecurityReport = ({ filteredPhotos, activityStats, texts, l
   <div class="container">
     <div class="header">
       <div class="header-content">
-        <h1>ðŸ” ${texts.title}</h1>
+        <h1>🔐 ${texts.title}</h1>
         <p>${texts.generatedAt}: ${new Date().toLocaleString()}</p>
       </div>
     </div>
@@ -657,11 +657,11 @@ export const generateSecurityReport = ({ filteredPhotos, activityStats, texts, l
     <div class="toolbar">
       <div class="search-box">
         <input type="text" id="searchInput" placeholder="${texts.searchPlaceholder}">
-        <span class="search-icon">ðŸ”</span>
+        <span class="search-icon">🔍</span>
       </div>
       <div class="toolbar-actions">
         <button class="btn btn-primary" onclick="window.print()">
-          ðŸ–¨ï¸ ${texts.printReport}
+          🖨️ ${texts.printReport}
         </button>
       </div>
     </div>
@@ -716,7 +716,7 @@ export const generateSecurityReport = ({ filteredPhotos, activityStats, texts, l
       </div>
       ${filteredPhotos.filter(p => p.photo_data && p.photo_data.startsWith('data:image')).length > 0 ? `
       <div class="section">
-        <h2>ðŸ“¸ ${texts.photoGallery}</h2>
+        <h2>📸 ${texts.photoGallery}</h2>
         <div class="photo-grid">
           ${filteredPhotos.filter(p => p.photo_data && p.photo_data.startsWith('data:image')).map(photo => `
             <div class="photo-card" onclick="openModal('${photo.photo_data}')">

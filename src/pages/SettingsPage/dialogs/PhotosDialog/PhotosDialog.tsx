@@ -368,14 +368,14 @@ export const PhotosDialog: React.FC<PhotosDialogProps> = ({
                         <CardContent sx={{ py: 1.5, px: 2 }}>
                           <Stack spacing={0.5}>
                             <Typography variant="caption" color="text.secondary" display="flex" alignItems="center" gap={0.5}>
-                              ðŸ“… {new Date(photo.timestamp).toLocaleDateString()}
+                              📅 {new Date(photo.timestamp).toLocaleDateString()}
                             </Typography>
                             <Typography variant="caption" color="text.secondary" display="flex" alignItems="center" gap={0.5}>
-                              ðŸ• {new Date(photo.timestamp).toLocaleTimeString()}
+                              🕐 {new Date(photo.timestamp).toLocaleTimeString()}
                             </Typography>
                             <Divider sx={{ my: 0.5 }} />
                             <Typography variant="body2" fontWeight={600} noWrap>
-                              ðŸ‘¤ {photo.username_attempt}
+                              👤 {photo.username_attempt}
                             </Typography>
                           </Stack>
                         </CardContent>
@@ -402,21 +402,21 @@ export const PhotosDialog: React.FC<PhotosDialogProps> = ({
                 ))}
                 
                 {filteredPhotos.length === 0 && (
-                  <Grid size={{ xs: 12 }}>
-                    <Paper sx={{ p: 8, textAlign: 'center', bgcolor: 'action.hover' }}>
-                      <Typography variant="h6" color="text.secondary" gutterBottom>
-                        ðŸ” {searchQuery || dateFilter !== 'all' 
-                          ? t('settings.noPhotosFound') 
-                          : t('settings.noFailedLoginPhotos')}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {searchQuery || dateFilter !== 'all'
-                          ? t('settings.tryAdjustingFilters')
-                          : t('settings.photosWillAppearHere')}
-                      </Typography>
-                    </Paper>
-                  </Grid>
-                )}
+                <Grid size={{ xs: 12 }}>
+                  <Paper sx={{ p: 8, textAlign: 'center', bgcolor: 'action.hover' }}>
+                    <Typography variant="h6" color="text.secondary" gutterBottom>
+                      🔍 {searchQuery || dateFilter !== 'all' 
+                        ? t('settings.noPhotosFound') 
+                        : t('settings.noFailedLoginPhotos')}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {searchQuery || dateFilter !== 'all'
+                        ? t('settings.tryAdjustingFilters')
+                        : t('settings.photosWillAppearHere')}
+                    </Typography>
+                  </Paper>
+                </Grid>
+              )}
               </Grid>
             </SmoothScrollContainer>
           </Stack>
