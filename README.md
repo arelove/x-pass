@@ -321,8 +321,8 @@ Built with these amazing technologies:
 
 - 🐛 **Bug Reports:** [GitHub Issues](https://github.com/arelove/x-pass/issues)
 - 💬 **Discussions:** [GitHub Discussions](https://github.com/arelove/x-pass/discussions)
-- 📧 **Email:** [ar3love@outlook.com]
-- 🌐 **Website:** [Coming Soon]
+- 📧 **Email:** ar3love@outlook.com
+- 🌐 **Website:** https://arelove.github.io/x-pass/
 
 ---
 
