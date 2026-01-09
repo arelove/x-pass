@@ -8,6 +8,7 @@
 > **Enterprise-grade password manager with military-level security, offline-first architecture, and duress mode protection.**
 
 <!-- 📸 INSERT SCREENSHOT HERE -->
+![X-PASS Login UI](docs/images/Login.png)
 ![X-PASS Interface](docs/images/hero-screenshot.png)
 
 ---
