@@ -42,9 +42,6 @@ npm install
 
 # Run dev server
 npm run tauri dev
-
-# Run tests
-npm run test
 ```
 
 ## Code Style
