@@ -81,11 +81,11 @@ export const generateSecurityReport = ({ filteredPhotos, activityStats, texts, l
   const getRiskLevel = () => {
     const count = filteredPhotos.length;
     const uniqueCount = Object.keys(attemptsByUsername).length;
-    if (count === 0) return { level: texts.low, color: '#48bb78', icon: 'âœ“' };
-    if (count < 5 && uniqueCount < 3) return { level: texts.low, color: '#48bb78', icon: 'âœ“' };
-    if (count < 15 && uniqueCount < 5) return { level: texts.medium, color: '#ed8936', icon: 'âš ' };
-    if (count < 30) return { level: texts.high, color: '#f56565', icon: 'âš ' };
-    return { level: texts.critical, color: '#c53030', icon: 'â›”' };
+    if (count === 0) return { level: texts.low, color: '#48bb78', icon: '✓' };
+    if (count < 5 && uniqueCount < 3) return { level: texts.low, color: '#48bb78', icon: '✓' };
+    if (count < 15 && uniqueCount < 5) return { level: texts.medium, color: '#ed8936', icon: '⚠' };
+    if (count < 30) return { level: texts.high, color: '#f56565', icon: '⚠' };
+    return { level: texts.critical, color: '#c53030', icon: '⛔' };
   };
 
   const risk = getRiskLevel();
@@ -671,7 +671,7 @@ export const generateSecurityReport = ({ filteredPhotos, activityStats, texts, l
         <div class="icon">${risk.icon}</div>
         <div class="content-risk">
           <h3>${texts.riskLevel}: ${risk.level}</h3>
-          <p>${filteredPhotos.length} ${texts.totalAttempts.toLowerCase()} â€¢ ${Object.keys(attemptsByUsername).length} ${texts.uniqueUsers.toLowerCase()}</p>
+          <p>${filteredPhotos.length} ${texts.totalAttempts.toLowerCase()} • ${Object.keys(attemptsByUsername).length} ${texts.uniqueUsers.toLowerCase()}</p>
         </div>
       </div>
       
