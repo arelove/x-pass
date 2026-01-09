@@ -5,7 +5,7 @@ First off, thank you for considering contributing to X-PASS! 🎉
 ## Ways to Contribute
 
 ### 🐛 Reporting Bugs
-1. Check if the bug is already reported in [Issues](https://github.com/ar3love/x-pass/issues)
+1. Check if the bug is already reported in [Issues](https://github.com/arelove/x-pass/issues)
 2. Open a new issue with:
    - Clear title
    - Steps to reproduce
