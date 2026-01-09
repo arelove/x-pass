@@ -9,6 +9,7 @@
 
 <!-- 📸 INSERT SCREENSHOT HERE -->
 ![X-PASS Login UI](docs/images/Login.png)
+<span>&nbsp;&nbsp;</span>
 ![X-PASS Interface](docs/images/hero-screenshot.png)
 
 ---
