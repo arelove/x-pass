@@ -886,6 +886,12 @@
             </div>
         </div>
     </footer>
+    <!-- Modal для увеличенного изображения (ДОБАВЬТЕ ЭТО!) -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImage" alt="Full size image">
+        <div class="modal-caption" id="modalCaption"></div>
+    </div>
     <script>
     // Открыть модальное окно
     function openModal(imageSrc, caption) {
