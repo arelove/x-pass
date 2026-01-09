@@ -7,10 +7,15 @@
 
 > **Enterprise-grade password manager with military-level security, offline-first architecture, and duress mode protection.**
 
-<!-- 📸 INSERT SCREENSHOT HERE -->
+<!-- 📸 LOGIN SCREENSHOT -->
 ![X-PASS Login UI](docs/images/Login.png)
-<span>&nbsp;&nbsp;</span>
-![X-PASS Interface](docs/images/hero-screenshot.png)
+
+<!-- 📸 MAIN INTERFACE SCREENSHOTS -->
+<p>
+  <img src="docs/images/hero-screenshot.png" width="32%" alt="X-PASS Main Interface"/>
+  <img src="docs/images/settings.png" width="32%" alt="X-PASS Settings"/>
+  <img src="docs/images/fail-pass.png" width="32%" alt="X-PASS Fail Password"/>
+</p>
 
 ---
 
@@ -28,6 +33,13 @@
 - **🥷 Duress/Pseudo Mode** — Show fake vault under coercion (configurable panic password)
 - **📊 Activity Logging** — Track all vault access with detailed analytics
 - **🔄 Encrypted Backups** — Export/import with password-protected encryption
+
+<!-- 📸 SECURITY FEATURES SCREENSHOTS -->
+<p>
+  <img src="docs/images/login-logs.png" width="32%" alt="Activity Logs"/>
+  <img src="docs/images/report.png" width="32%" alt="Security Report"/>
+  <img src="docs/images/duress-mode.png" width="32%" alt="Duress Mode"/>
+</p>
 
 ### 🎨 **User Experience**
 - **10 Premium Themes** — Dark, Light, Cyberpunk, Dracula, Ocean, and more
